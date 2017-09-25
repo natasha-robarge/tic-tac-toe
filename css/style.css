@@ -1,20 +1,65 @@
+html {
+  margin: 0 auto;
+  padding: 0 auto;
+}
+
 #board {
   margin-top: 80px;
 }
 
 .box {
-  border: 3px solid purple;
+  border: 10px solid;
   height: 150px;
   cursor: pointer;
+  border-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg') 5;
+  background-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg');
+  background-position: center;
+  background-size: cover;
+  -moz-border-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg') 5;
+  -moz-background-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg');
+  -moz-background-position: center;
+  -moz-background-size: cover;
+  -ms-border-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg') 5;
+  -ms-background-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg');
+  -ms-background-position: center;
+  -ms-background-size: cover;
+  -webkit-border-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg') 5;
+  -webkit-background-image: url('http://pm1.narvii.com/5918/abf0cc703aba4d0ffd11d1236dbf9a6558e0baca_hq.jpg');
+  -webkit-background-position: center;
+  -webkit-background-size: cover;
+  animation-name: spin;
+  animation-duration: 800ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  -moz-animation-name: spin;
+  -moz-animation-duration: 800ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -webkit-animation-name: spin;
+  -webkit-animation-duration: 800ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -ms-animation-name: spin;
+  -ms-animation-duration: 800ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
 }
 
+.text-center {
+  margin: 0;
+  padding: 0;
+}
 
 h1 {
   font-size: 75px;
   text-shadow: 4px 4px #ad4ad3;
 }
 
-
+#marquee {
+  overflow: hidden;
+  position: relative;
+  animation: marquee 1s linear infinite;
+}
 
 p {
   font-size: 30px;
@@ -24,4 +69,105 @@ p {
 body {
   text-align: center;
   font-size: 100px;
+  margin: 0 auto;
+  padding: 0 auto;
+  background-color: #d195dd;
+}
+
+nav {
+  display: flex;
+  width: auto;
+  height: auto;
+  background-position: center;
+  background-image: url('https://i.pinimg.com/736x/fb/eb/f8/fbebf874a63e9766539f562c0b30131d--drawing-eyes-drawing-art.jpg');
+  text-align: center;
+
+}
+
+a {
+  font-size: 20px;
+  text-align: left;
+  flex: 1;
+  flex-direction: row;
+  text-decoration: none;
+  color: #bb00bb;
+}
+
+a:hover {
+  color: #00e0ff;
+  text-decoration: line-through;
+}
+
+#barcode {
+  font-family: 'Libre Barcode 39 Text', cursive;
+  font-size: 60px;
+}
+
+.ai-info {
+  font-family: 'Indie Flower', cursive;
+}
+
+#line {
+  width: 40%;
+  border-width: medium;
+}
+
+.instruct-info {
+  font-family: 'Indie Flower', cursive;
+}
+
+button {
+  background-color: #8900be;
+  color: #FFF;
+  padding: 10px;
+  border-radius: 20px;
+  width: 90px;
+  height: 40px;
+}
+
+.row {
+  background-color: #d195dd;
+}
+
+@media only (max-width: 700px) {
+  nav {
+    width: 50%;
+  }
+  h1 {
+    width: 50%;
+    height: 50%;
+    font-size: 20px;
+  }
+  p {
+    font-size: 15px;
+    line-height: 10px;
+  }
+  #board {
+    margin-top: 40px;
+  }
+  .box {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+@keyframes spin { /*Spinning animation for board to annoy players. */
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}
+@keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(359deg); }
+}
+@keyframes spin {
+  from { -ms-transform: rotate(0deg); }
+  to { -ms-transform: rotate(359deg); }
+}
+@keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(359deg); }
+}
+@keyframes marquee {
+  0% { right: 0%; }
+  100% { left: 100%; }
 }

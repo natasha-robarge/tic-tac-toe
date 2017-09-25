@@ -9,8 +9,10 @@ $(document).ready(function() {
   Users should be able to click a "reset" button to clear all X's and O's from the board and restart the game.
   */
 
+//I named the AI Julia. In case that matters.
+
 var computer;
-var player = prompt("Are you Xs' or O's? (Input X/O)");
+let player = prompt("Are you Xs' or O's? (Input X/O)");
 console.log('Player chose', player)
 
 if(player === 'x' || player === 'X') {
@@ -59,34 +61,46 @@ var checkIfSomeoneWon = function() {
   for(var i = 0; i < winConditions.length; i++) {
 
 
-    for(var a = 0; a < winConditions[i].length; a++) {
       //console.log('boxes here ', boxesState[winConditions[i][0]] === boxesState[winConditions[i][1]])
       if(boxesState[winConditions[i][0]] === boxesState[winConditions[i][1]]
         && boxesState[winConditions[i][0]] === boxesState[winConditions[i][2]]
         && boxesState[winConditions[i][1]] === boxesState[winConditions[i][2]]
-        && boxesState[winConditions[i][a]] === 'X' && boxesState[winConditions[i][a]] !== 'empty') {
+        && boxesState[winConditions[i][0]] === 'X' && boxesState[winConditions[i][0]] !== 'empty') {
           alert('Game won by X');
         var playAgain = prompt('Would you like to play again? (Y/N)')
-          if(playAgain === 'y'.toUpperCase()) {
-            resetGame();
-          } else {
-              break;
+        console.log('In game won by x')
+          if(playAgain === 'y'.toLowerCase()) {
+            console.log('Before x reset')
+              resetGame();
+            console.log('After x reset')
+              return;
+          } else if (playAgain === 'n'.toLowerCase()) {
+              delete randomChoice;
+              delete boxClick;
+              resetGame();
+              return;
           }
       } else if(boxesState[winConditions[i][0]] === boxesState[winConditions[i][1]]
         && boxesState[winConditions[i][0]] === boxesState[winConditions[i][2]]
         && boxesState[winConditions[i][1]] === boxesState[winConditions[i][2]]
-        && boxesState[winConditions[i][a]] === 'O' && boxesState[winConditions[i][a]] !== 'empty') {
+        && boxesState[winConditions[i][0]] === 'O' && boxesState[winConditions[i][0]] !== 'empty') {
           alert('Game won by O');
           var playAgain = prompt('Would you like to play again? (Y/N)')
-            if(playAgain === 'y'.toUpperCase()) {
-              resetGame();
-            } else {
-                break;
+          console.log('In game won by o')
+            if(playAgain === 'y'.toLowerCase()) {
+              console.log('Before o reset')
+                resetGame();
+              console.log('After o reset')
+                return;
+            } else if (playAgain === 'n'.toLowerCase()) {
+                delete randomChoice;
+                delete boxClick;
+                resetGame();
+                return;
             }
       } else if(!boxesState[winConditions[i]]) {
           console.log('Tie');
       }
-    }
   }
   // itereate through winConditions
   // and check each property in boxesState to see if they all match
@@ -136,6 +150,21 @@ var checkIfSomeoneWon = function() {
     // and change accordingly
 
   }
+
+    function switchPlayer() {
+        if(player === 'X' || player === 'x') {
+          console.log('In switch for x')
+            player = 'O';
+          console.log('Player is ' + player);
+            computer = 'X';
+        } else if (player === 'O' || player === 'o') {
+          console.log('In switch for O')
+            player = 'X';
+          console.log('Player is ' + player);
+            computer = 'O';
+        }
+      moves = 0;
+    }
 
   function boxClick() {
 
@@ -189,22 +218,24 @@ var checkIfSomeoneWon = function() {
 
 boxClick();
 
+
 //if box is equal to 1
 function resetGame() {
   var boxSlot = $('.box');
    for(var prop in boxesState) {
      if(boxesState[prop] === 'X' || boxesState[prop] === 'O') {
-      boxesState[prop] = 'empty';
-      boxSlot.text('');
-      boxSlot.removeClass('X');
-      boxSlot.removeClass('O');
-      console.log('Class removed')
-    }
+        boxesState[prop] = 'empty';
+        boxSlot.text('');
+        boxSlot.removeClass('X');
+        boxSlot.removeClass('O');
+        console.log('Class removed')
+        switchPlayer();
+     }
   }
 };
 
-$('.btn').addEventListener('click', function() {
-  resetGame();
+$('.btn').on('click', function() {
+    resetGame();
 });
 
 
