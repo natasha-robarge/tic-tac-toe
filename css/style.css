@@ -161,9 +161,14 @@ footer {
   color: red;
 }
 
-img {
+.squirrel {
   height: 50%;
   width: 50%
+}
+
+.rage {
+  width: 30%;
+  height: 35%;
 }
 
 @keyframes spin { /*Spinning animation for board to annoy players. */
