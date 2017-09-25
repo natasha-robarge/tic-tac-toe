@@ -9,8 +9,6 @@ $(document).ready(function() {
   Users should be able to click a "reset" button to clear all X's and O's from the board and restart the game.
   */
 
-  //So click function that appends X or O on a div tag
-
 var computer;
 var player = prompt("Are you Xs' or O's? (Input X/O)");
 console.log('Player chose', player)
@@ -20,8 +18,6 @@ if(player === 'x' || player === 'X') {
 } else if (player === 'o' || player === 'O') {
   computer = 'X';
 }
-
-var name = prompt('What is your name?');
 
 var boxes = [];
 
@@ -35,20 +31,20 @@ var boxesState = {
   '7': 'empty',
   '8': 'empty',
   '9': 'empty'
-}
+};
 
-  var checkifAllBoxesAreFilled = function(){
-      for(var property in boxesState) {
-        if(boxesState[property] !== 'empty') {
-          return true
-        } else {
+  var checkifAllBoxesAreFilled = function() {
+    for(var property in boxesState) {
+      if(boxesState[property] !== 'empty') {
+        return true;
+      } else {
           return false;
-        }
       }
+    }
   }
 
 
-var checkIfSomeoneWon = function(winConditions){
+var checkIfSomeoneWon = function() {
   var winConditions = [
       [1, 2, 3], // first row and so on..
       [4, 5, 6],
@@ -59,15 +55,35 @@ var checkIfSomeoneWon = function(winConditions){
       [1, 5, 9],
       [3, 5, 7]
   ];
+
   for(var i = 0; i < winConditions.length; i++) {
 
-    for(var a = 0; a > winConditions[i].length; a--) {
-        //  console.log(winConditions[boxesState[i][a]])
-      if(winConditions[i][a] === boxesState[i][a] && boxesState[i][a] === 'X') {
-        console.log('Game won by X');
-      } else if(winConditions[i][a] === boxesState[i][a] && boxesState[i][a] === 'O') {
-          console.log('Game won by O');
-      } else if(winConditions[i][a] !== boxesState[i][a]) {
+
+    for(var a = 0; a < winConditions[i].length; a++) {
+      //console.log('boxes here ', boxesState[winConditions[i][0]] === boxesState[winConditions[i][1]])
+      if(boxesState[winConditions[i][0]] === boxesState[winConditions[i][1]]
+        && boxesState[winConditions[i][0]] === boxesState[winConditions[i][2]]
+        && boxesState[winConditions[i][1]] === boxesState[winConditions[i][2]]
+        && boxesState[winConditions[i][a]] === 'X' && boxesState[winConditions[i][a]] !== 'empty') {
+          alert('Game won by X');
+        var playAgain = prompt('Would you like to play again? (Y/N)')
+          if(playAgain === 'y'.toUpperCase()) {
+            resetGame();
+          } else {
+              break;
+          }
+      } else if(boxesState[winConditions[i][0]] === boxesState[winConditions[i][1]]
+        && boxesState[winConditions[i][0]] === boxesState[winConditions[i][2]]
+        && boxesState[winConditions[i][1]] === boxesState[winConditions[i][2]]
+        && boxesState[winConditions[i][a]] === 'O' && boxesState[winConditions[i][a]] !== 'empty') {
+          alert('Game won by O');
+          var playAgain = prompt('Would you like to play again? (Y/N)')
+            if(playAgain === 'y'.toUpperCase()) {
+              resetGame();
+            } else {
+                break;
+            }
+      } else if(!boxesState[winConditions[i]]) {
           console.log('Tie');
       }
     }
@@ -110,18 +126,14 @@ var checkIfSomeoneWon = function(winConditions){
       // rerun randomChoice until all boxes are filled
       var allBoxesAreFilled = checkifAllBoxesAreFilled()
 
-      if (allBoxesAreFilled){
-        //game is over
-        //Alert('Game over!')
+      if (allBoxesAreFilled) {
+        checkIfSomeoneWon();
         return;
       } else {
           randomChoice();
       }
     }
-
-
     // and change accordingly
-
 
   }
 
@@ -180,19 +192,20 @@ boxClick();
 //if box is equal to 1
 function resetGame() {
   var boxSlot = $('.box');
-  // for(var prop in boxesState) {
-  //   if(boxesState[prop] === 'X' || boxesState[prop] === 'O') {
-    //  boxesState[prop] = 'empty';
+   for(var prop in boxesState) {
+     if(boxesState[prop] === 'X' || boxesState[prop] === 'O') {
+      boxesState[prop] = 'empty';
       boxSlot.text('');
       boxSlot.removeClass('X');
       boxSlot.removeClass('O');
       console.log('Class removed')
-  //  }
-  //}
+    }
+  }
 };
 
-$('.btn').on('click', function() {
+$('.btn').addEventListener('click', function() {
   resetGame();
 });
+
 
 }); //End of document ready function
