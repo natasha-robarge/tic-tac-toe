@@ -103,17 +103,13 @@ a:hover {
   font-size: 60px;
 }
 
-.ai-info {
+.ai-info, .instruct-info, .flair-info {
   font-family: 'Indie Flower', cursive;
 }
 
 #line {
   width: 40%;
   border-width: medium;
-}
-
-.instruct-info {
-  font-family: 'Indie Flower', cursive;
 }
 
 button {
@@ -149,6 +145,25 @@ button {
     height: 30px;
     width: 30px;
   }
+}
+
+footer {
+  background-color: #000;
+  color: #FFF;
+}
+
+.footer-p, .created {
+  font-size: 20px;
+  padding: 15px;
+}
+
+.fa-heartbeat {
+  color: red;
+}
+
+img {
+  height: 50%;
+  width: 50%
 }
 
 @keyframes spin { /*Spinning animation for board to annoy players. */
