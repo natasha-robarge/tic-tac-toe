@@ -21,12 +21,9 @@ if(player === 'x' || player === 'X') {
   computer = 'X';
 }
 
-var name = prompt('What is your name?')
+var name = prompt('What is your name?');
 
-var boxes = [
-
-]
-
+var boxes = [];
 
 var boxesState = {
   '1': 'empty',
@@ -40,17 +37,6 @@ var boxesState = {
   '9': 'empty'
 }
 
-var winConditions = [
-    [0, 1, 2], // first row and so on..
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6], // first column and so on...
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-];
-
   var checkifAllBoxesAreFilled = function(){
       for(var property in boxesState) {
         if(boxesState[property] !== 'empty') {
@@ -62,21 +48,34 @@ var winConditions = [
   }
 
 
-var checkIfSomeoneWon = function(){
-
-  // itereate through winConditions
+var checkIfSomeoneWon = function(winConditions){
+  var winConditions = [
+      [1, 2, 3], // first row and so on..
+      [4, 5, 6],
+      [7, 8, 9],
+      [1, 4, 7], // first column and so on...
+      [2, 5, 8],
+      [3, 6, 9],
+      [1, 5, 9],
+      [3, 5, 7]
+  ];
   for(var i = 0; i < winConditions.length; i++) {
-  // and check each property in boxesState to see if they all match
-    for(var j = 0; j < winConditions[i].length; j++) {
-      //if array at i === 'x' or 'o'
-      if(winConditions[i] === 'X') {
-        console.log('X wins')
-      } else if (winConditions[i] === 'O') {
-        console.log('O wins')
+
+    for(var a = 0; a > winConditions[i].length; a--) {
+        //  console.log(winConditions[boxesState[i][a]])
+      if(winConditions[i][a] === boxesState[i][a] && boxesState[i][a] === 'X') {
+        console.log('Game won by X');
+      } else if(winConditions[i][a] === boxesState[i][a] && boxesState[i][a] === 'O') {
+          console.log('Game won by O');
+      } else if(winConditions[i][a] !== boxesState[i][a]) {
+          console.log('Tie');
       }
     }
-  // run through every possible combination and check to see if there are three X's or O's in arow
   }
+  // itereate through winConditions
+  // and check each property in boxesState to see if they all match
+      //if array at i === 'x' or 'o'
+  // run through every possible combination and check to see if there are three X's or O's in arow
 }
 
   function randomChoice() {
@@ -89,7 +88,6 @@ var checkIfSomeoneWon = function(){
     if (boxesState[computerChoice] === 'empty'){
 
       //CHECK TO SEE IF ANYONE WON
-
      checkIfSomeoneWon()
 
       if(boxesState[computerChoice] === "empty") {
@@ -130,8 +128,6 @@ var checkIfSomeoneWon = function(){
   function boxClick() {
 
     console.log('function', ' boxClick');
-
-
 
     var boxes = [...document.querySelectorAll('.col-md-4')];
 
@@ -182,7 +178,21 @@ var checkIfSomeoneWon = function(){
 boxClick();
 
 //if box is equal to 1
+function resetGame() {
+  var boxSlot = $('.box');
+  // for(var prop in boxesState) {
+  //   if(boxesState[prop] === 'X' || boxesState[prop] === 'O') {
+    //  boxesState[prop] = 'empty';
+      boxSlot.text('');
+      boxSlot.removeClass('X');
+      boxSlot.removeClass('O');
+      console.log('Class removed')
+  //  }
+  //}
+};
 
-
+$('.btn').on('click', function() {
+  resetGame();
+});
 
 }); //End of document ready function
